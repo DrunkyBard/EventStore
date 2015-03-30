@@ -283,7 +283,7 @@ namespace EventStore.Core.Services.Transport.Http
                 return unformattedjson;
             JsonReader reader = new JsonTextReader(new System.IO.StringReader(unformattedjson));
             reader.DateParseHandling = DateParseHandling.None;
-            var jo = JObject.Parse(unformattedjson);
+            var jo = JObject.Load(reader);
             var json = JsonConvert.SerializeObject(jo, Formatting.Indented);
             return json;
         }
