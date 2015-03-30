@@ -281,6 +281,8 @@ namespace EventStore.Core.Services.Transport.Http
         {
             if (string.IsNullOrEmpty(unformattedjson))
                 return unformattedjson;
+            JsonReader reader = new JsonTextReader(new System.IO.StringReader(unformattedjson));
+            reader.DateParseHandling = DateParseHandling.None;
             var jo = JObject.Parse(unformattedjson);
             var json = JsonConvert.SerializeObject(jo, Formatting.Indented);
             return json;
